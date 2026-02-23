@@ -22,7 +22,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event, context) => {
       };
     }
 
-    if (!isValidMoviePayload(body)) {
+    if (!isMovie(body) ) {
         return {
           statusCode: 500,
           headers: {
@@ -71,4 +71,16 @@ function createDDbDocClient() {
   };
   const translateConfig = { marshallOptions, unmarshallOptions };
   return DynamoDBDocumentClient.from(ddbClient, translateConfig);
+}
+
+export function isMovie(data: any ): data is Movie {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    "id" in data &&
+    "title" in data &&
+    "overview" in data &&
+    "genre_ids" in data 
+    // other movie properties
+)
 }
