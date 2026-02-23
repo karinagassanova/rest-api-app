@@ -8,3 +8,6 @@ cdk.out
 
 # Misc
 .DS_Store
+
+# Prevents the generated schemas from being added to the repo
+*.schema.json
